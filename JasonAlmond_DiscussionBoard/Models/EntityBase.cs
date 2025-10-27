@@ -6,11 +6,10 @@ namespace JasonAlmond_DiscussionBoard.Models;
 
 public class EntityBase
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//?
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public bool IsDeleted { get; set; }
-    [ConcurrencyCheck]//?
+    [ConcurrencyCheck]
     public long Timestamp { get; set; }
 
     public EntityBase()

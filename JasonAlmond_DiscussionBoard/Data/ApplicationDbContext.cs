@@ -38,6 +38,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<Post>()
             .Property(e => e.Timestamp)
             .IsConcurrencyToken();
+        
+        /*foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (typeof(EntityBase).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.Name)
+                    .Property<long>("Timestamp")
+                    .IsConcurrencyToken();
+            }
+        }*/
+        
         modelBuilder.Entity<DiscussionThread>()
             .HasIndex(x => x.CreatedAt)
             .IsUnique();

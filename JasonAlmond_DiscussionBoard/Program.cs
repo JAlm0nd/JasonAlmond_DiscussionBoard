@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using JasonAlmond_DiscussionBoard.Data;
 using JasonAlmond_DiscussionBoard.Models;
+using JasonAlmond_DiscussionBoard.Repos;
+using JasonAlmond_DiscussionBoard.Services;
+using JasonAlmond.DiscussionBoard.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn
         .RequireConfirmedAccount = !builder.Environment.IsDevelopment())
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped<DiscussionThreadService>();
+builder.Services.AddScoped<IRepo<DiscussionThread>, DiscussionThreadRepo>();
+builder.Services.AddScoped<IRepo<Post>, PostRepo>();
 
 var app = builder.Build();
 
