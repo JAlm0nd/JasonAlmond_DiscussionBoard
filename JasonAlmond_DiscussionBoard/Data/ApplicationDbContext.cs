@@ -60,7 +60,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public override int SaveChanges()
     {
-        var entries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
+        var entries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State ==
+            EntityState.Modified);
         foreach (var entry in entries)
         {
             entry.Property("Timestamp").CurrentValue = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -90,11 +91,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 {
                     return base.SaveChanges();
                 }
-                //Refresh original values to bypass next concurrency check
+//Refresh original values to bypass next concurrency check
                 entry.OriginalValues.SetValues(databaseValues);
             }
             throw;
         }
-
     }
 }

@@ -1,0 +1,57 @@
+﻿@page "{ThreadId}/{PostId?}"
+@model JasonAlmond_DiscussionBoard.Pages.Reply
+
+@{
+    ViewData["Title"] = "Post a Reply to " + Model.Parent.Title;
+}
+
+<div class="card rounded-0 rounded-2" style="border-radius: 20px;">
+    <div class="card-title">
+        <strong class="card-title">@Html.Raw(Model.Parent.Title)</strong>
+    </div>
+    <div class="card-body rounded-0 rounded-2">
+        <p class="card-text">@Html.Raw(Model.Parent.Content)</p>
+    </div>
+</div>
+
+<form method="post" id="replyForm">
+    <div class="form-group">
+        <label asp-for="Parent.Title">Title</label>
+        <input asp-for="Parent.Title" class="form-control" value="Re: @Model.Parent.Title" />
+        <span asp-validation-for="Parent.Title" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label for="quillEditor">Content</label>
+        <div id="quillEditor" style="height: 200px;" data-placeholder="Enter your reply here..."></div>
+        <input type="hidden" asp-for="Parent.Content" id="Content" />
+        <span asp-validation-for="Parent.Content" class="text-danger"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit Reply</button>
+</form>
+
+@section Scripts {
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    
+    <script>
+        var quill = new Quill('#quillEditor', {
+            theme: 'snow',
+            placeholder: document.getElementById('quillEditor').getAttribute('data-placeholder')
+        });
+
+        // On form submit, copy Quill content HTML to the hidden input
+        document.getElementById('replyForm').onsubmit = function () {
+            var contentInput = document.getElementById('Content');
+            contentInput.value = quill.root.innerHTML;
+            return true; // Allow form submission
+        };
+
+        // Optionally initialize Quill with existing content if editing
+        var initialContent = '@Html.Raw(Model.Parent.Content)';
+        if(initialContent) {
+            quill.root.innerHTML = initialContent;
+        }
+    </script>
+}

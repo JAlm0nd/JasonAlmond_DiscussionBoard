@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using JasonAlmond_DiscussionBoard.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using JasonAlmond_DiscussionBoard.Models;
-using JasonAlmond_DiscussionBoard.Repos;
 using JasonAlmond.DiscussionBoard.Repos;
 
 namespace JasonAlmond_DiscussionBoard.Services
@@ -14,21 +7,18 @@ namespace JasonAlmond_DiscussionBoard.Services
     public class DiscussionThreadService
     {
         private readonly IRepo<DiscussionThread> _repo;
+        private readonly PostService _postService;
         private readonly IConfiguration _config;
         private readonly ILogger<DiscussionThread> _log;
 
         private DiscussionThread dt;
         private List<DiscussionThread> threads;
 
-        public DiscussionThreadService(
-            IRepo<DiscussionThread> repo,
-            IConfiguration config,
-            ILogger<DiscussionThread> log)
+        public DiscussionThreadService(IRepo<DiscussionThread> repo, PostService postService, IConfiguration config, ILogger<DiscussionThread> log)
         {
             _repo = repo;
             _config = config;
             _log = log;
-
             dt = new DiscussionThread();
             threads = new List<DiscussionThread>();
         }
@@ -41,6 +31,7 @@ namespace JasonAlmond_DiscussionBoard.Services
                     .Include(x => x.ApplicationUser)
                     .Include(x => x.Posts)
                     .FirstOrDefault() ?? new DiscussionThread();
+                dt.Posts = _postService.GetForThread(Id);
             }
             catch (Exception ex)
             {
@@ -49,6 +40,19 @@ namespace JasonAlmond_DiscussionBoard.Services
             return dt;
         }
 
+        public int CountPosts(int ThreadId)
+        {
+            try
+            {
+                return _postService.GetAll().Count(p => p.DiscussionThreadId == ThreadId && !p.IsDeleted);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError("Error counting posts for ThreadId {ThreadId}: " + ex.Message, ThreadId);
+                return 0;
+            }
+        }
+        
         public List<DiscussionThread> GetAll()
         {
             try

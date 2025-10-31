@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/Discussion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlzY3Vzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/DiscussionThreads.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlzY3Vzc2lvblRocmVhZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,12 +42,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/Reply.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwbHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/_PostTreeView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1Bvc3RUcmVlVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jason/RiderProjects/JasonAlmond_DiscussionBoard/JasonAlmond_DiscussionBoard/Pages/_ViewImports.cshtml]

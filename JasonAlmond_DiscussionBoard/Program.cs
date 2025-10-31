@@ -22,6 +22,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn
 builder.Services.AddScoped<DiscussionThreadService>();
 builder.Services.AddScoped<IRepo<DiscussionThread>, DiscussionThreadRepo>();
 builder.Services.AddScoped<IRepo<Post>, PostRepo>();
+builder.Services.AddScoped<PostService>();
 
 var app = builder.Build();
 

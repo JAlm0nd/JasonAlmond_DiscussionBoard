@@ -1,17 +1,19 @@
 ﻿@page
-
-@model IndexModel
 @using JasonAlmond_DiscussionBoard.Models;
+@model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="container">
+        <form method="get">
+            <button type="submit" asp-page="/DiscussionThreads">New Discussion Thread</button>
+        </form>
+    </div>
 </div>
 
-<div class="container">
+<div>
     @if (Model.DiscussionThreads.Count != 0)
     {
         <table class="table table-striped">
@@ -20,17 +22,17 @@
                 <th>Title</th>
                 <th>User</th>
                 <th>Date</th>
-                <th>Posts</th>
+                <th>Post</th>
             </tr>
             </thead>
             <tbody>
-            @foreach(DiscussionThread dt in Model.DiscussionThreads)
+            @foreach (DiscussionThread dt in Model.DiscussionThreads)
             {
                 <tr>
-                    <td>@dt.Title</td>
+                    <td><a href="/DiscussionThreads/@dt.Id">@dt.Title</a></td>
                     <td>@dt.ApplicationUser.ToString()</td>
                     <td>@dt.CreatedAt.ToLocalTime().ToString("f")</td>
-                    <td>@dt.Posts.Count()</td>
+                    <td><a href="/Discussion/@dt.Id">@dt.PostCount</a></td>
                 </tr>
             }
             </tbody>
@@ -41,3 +43,4 @@
         <h3>No threads have been created yet.</h3>
     }
 </div>
+

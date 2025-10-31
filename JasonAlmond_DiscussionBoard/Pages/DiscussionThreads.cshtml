@@ -1,0 +1,71 @@
+﻿@page "{Id?}"
+@model JasonAlmond_DiscussionBoard.Pages.DiscussionThreads
+
+@{
+    ViewData["Title"] = "Add or Edit Discussion Threads";
+}
+
+<div class="container">
+    <form id="form" method="post" onsubmit="handleSubmit()">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Discussion.Id > 0)
+        {
+            <div class="row">
+                <p>Created On @Model.DiscussionThread.CreatedAt.ToString("f")</p>
+            </div>
+            <input type="hidden" asp-for="@Model.Discussion.Id" value="@Model.Discussion.Id"/>
+        }
+
+        <div class="form-group">
+            <label asp-for="Discussion.Content" class="control-label"></label>
+            <input type="hidden" asp-for="@Model.Discussion.Content" />
+            <div id="body"></div>
+            <span asp-validation-for="Discussion.Content" class="text-danger"></span>
+        </div>
+        
+        <div class="form-group">
+            <br />
+            <input type="submit" />
+        </div>
+    </form>
+</div>
+
+@section Scripts 
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script>
+    var toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'], //Toggled buttons
+    ['blockquote', 'code-block'],
+    [{'header':1}, {'header':2}], //Custom button values
+    [{'list':'ordered'}, {'list':'bullet'}],
+    [{'script':'sub'}, {'script':'super'}], //Superscript/Subscript
+    [{'indent':'-1'}, {'indent':'+1'}], //Outdent/Indent
+    [{'direction':'rtl'}], //Text direction
+    [{'size': ['small', false, 'large', 'huge']}], //Custom dropdown
+    [{'header': [1, 2, 3, 4, 5, 6, false]}],
+    ['link', 'image', 'video', 'formula'], //Adds image support
+    [{'color': []}, {'background': []}], //Dropdown with defaults from theme
+    [{'font': []}],
+    [{'align': []}],
+    ['clean'] //Remove formatting button
+    ];
+    //TODO - editHtmlButton has been removed. Causing issues.
+    const quill = new Quill('#body', 
+        {
+            modules: {toolbar: toolbarOptions
+        },
+    theme: 'snow'
+    });
+    quill.root.innerHTML = '@Html.Raw(Model.Discussion.Content)';
+    function handleSubmit() 
+    {
+    console.info('handleSubmit called');
+    document.getElementById('Discussion_Content').value = quill.root.innerHTML;
+    }
+</script>
+}

@@ -1,20 +1,19 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;//?
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JasonAlmond_DiscussionBoard.Models;
 
 public class DiscussionBase : EntityBase
 {
-    [MaxLength(512)] // Limiting the title to 512 characters
+    [MaxLength(512)]
     public string Title { get; set; }
 
-    public string Content { get; set; } // Content of the discussion
+    public string Content { get; set; }
 
-    public DateTime CreatedAt { get; set; } // When the discussion was created
+    public DateTime CreatedAt { get; set; }
 
     [ForeignKey("ApplicationUser")] 
-    public string ApplicationUserId { get; set; } // Foreign key to ApplicationUser
+    public string ApplicationUserId { get; set; }
 
-    public ApplicationUser ApplicationUser { get; set; } // Navigation property to ApplicationUser
+    public ApplicationUser ApplicationUser { get; set; }
 }

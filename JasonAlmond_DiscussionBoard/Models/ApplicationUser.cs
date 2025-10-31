@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace JasonAlmond_DiscussionBoard.Models;
@@ -27,6 +26,6 @@ public class ApplicationUser : IdentityUser
 
     public override string ToString()
     {
-        return $"{FirstName} {LastName} ({UserName})"; // A nice representation of the user
+        return $"{FirstName} {LastName} ({UserName})";
     }
 }

@@ -141,3 +141,4 @@ C:\Users\jason\RiderProjects\JasonAlmond_DiscussionBoard\JasonAlmond_DiscussionB
 C:\Users\jason\RiderProjects\JasonAlmond_DiscussionBoard\JasonAlmond_DiscussionBoard\obj\Debug\net8.0\JasonAlmond_DiscussionBoard.pdb
 C:\Users\jason\RiderProjects\JasonAlmond_DiscussionBoard\JasonAlmond_DiscussionBoard\obj\Debug\net8.0\JasonAlmond_DiscussionBoard.genruntimeconfig.cache
 C:\Users\jason\RiderProjects\JasonAlmond_DiscussionBoard\JasonAlmond_DiscussionBoard\obj\Debug\net8.0\ref\JasonAlmond_DiscussionBoard.dll
+C:\Users\jason\RiderProjects\JasonAlmond_DiscussionBoard\JasonAlmond_DiscussionBoard\obj\Debug\net8.0\JasonAlmond_DiscussionBoard.sourcelink.json

@@ -335,7 +335,7 @@ namespace JasonAlmond_DiscussionBoard.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("JasonAlmond_DiscussionBoard.Models.Post", "ParentPost")
-                        .WithMany()
+                        .WithMany("SubPosts")
                         .HasForeignKey("ParentPostId");
 
                     b.Navigation("ApplicationUser");
@@ -406,6 +406,11 @@ namespace JasonAlmond_DiscussionBoard.Data.Migrations
             modelBuilder.Entity("JasonAlmond_DiscussionBoard.Models.DiscussionThread", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("JasonAlmond_DiscussionBoard.Models.Post", b =>
+                {
+                    b.Navigation("SubPosts");
                 });
 #pragma warning restore 612, 618
         }
