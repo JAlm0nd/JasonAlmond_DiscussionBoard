@@ -57,7 +57,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .IsUnique();
 
     }
-
+    
     public override int SaveChanges()
     {
         var entries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State ==

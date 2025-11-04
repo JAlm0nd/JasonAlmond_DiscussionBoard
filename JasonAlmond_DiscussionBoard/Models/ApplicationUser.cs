@@ -5,10 +5,6 @@ namespace JasonAlmond_DiscussionBoard.Models;
 
 public class ApplicationUser : IdentityUser
 {
-    /*[ForeignKey("ApplicationUser")]
-
-    public String ApplicationUserId { get; set; }
-    public ApplicationUser ApplicationUser { get; set; }*/
     [MaxLength(100)] // Limit the First Name to 100 characters
     public string FirstName { get; set; } = string.Empty;
 

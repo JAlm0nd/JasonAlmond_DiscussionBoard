@@ -15,7 +15,7 @@ namespace JasonAlmond_DiscussionBoard.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.19");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.21");
 
             modelBuilder.Entity("JasonAlmond_DiscussionBoard.Models.ApplicationUser", b =>
                 {

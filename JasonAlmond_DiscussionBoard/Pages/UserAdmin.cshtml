@@ -1,0 +1,88 @@
+﻿@page "{Id?}"
+@model JasonAlmond_DiscussionBoard.Pages.UserAdmin
+@using System.Security.Claims
+@using JasonAlmond_DiscussionBoard.Helpers
+@using JasonAlmond_DiscussionBoard.Models
+
+@{
+    ViewData["Title"] = "Manage User Permissions";
+}
+
+<div class="text-center">
+    <div class="container">
+        <form method="get">
+            <div class="form-group">
+                <label asp-for="User">Select User</label>
+                <select asp-for="Id">
+                    <option value="">-- Select User --</option>
+                    @foreach (ApplicationUser user in Model.Users)
+                    {
+                        <option value="@user.Id">@user.UserName</option>
+                    }
+                </select>
+            </div>
+        </form>
+        
+        @if (Model.ApplicationUser != null && Model.Claims.Count > 0)
+        {
+            <div class="card d-inline-flex">
+                <div class="card-header">
+                    <h5 class="card-title">Permissions for @Model.ApplicationUser.ToString()</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                <tr>
+                    <td>Administrator</td>
+                    <td>
+                        @if (Model.IsAdmin)
+                        {
+                            <form asp-route-Id=@Model.Id method="post">
+                                <input type="hidden" id="Type" name="Type" value="@PolicyTypes.IsAdmin" />
+                                <input type="hidden" id="Type" name="Type" value="@PolicyValues.False" />
+                                <partial name="_RemoveButton"/>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-route-Id=@Model.Id method="post">
+                                <input type="hidden" id="Type" name="Type" value="@PolicyTypes.IsAdmin" />
+                                <input type="hidden" id="Type" name="Type" value="@PolicyValues.True" />
+                                <partial name="_AddButton"/>
+                                </form>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Moderator</td>
+                    <td>
+                        @if (Model.IsModerator)
+                        {
+                            <form asp-route-Id="@Model.Id" method="post">
+                                <input type="hidden" id="Type" name="Type" value="@PolicyTypes.IsModerator" />
+                                <input type="hidden" id="Value" name="Value" value="@PolicyValues.False" />
+                                <partial name="_RemoveButton" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-route-Id="@Model.Id" method="post">
+                                <input type="hidden" id="Type" name="Type" value="@PolicyTypes.IsModerator" />
+                                <input type="hidden" id="Value" name="Value" value="@PolicyValues.True" />
+                                <partial name="_AddButton" />
+                            </form>
+                        }
+                    </td>
+                </tr>
+            </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    document.getElementById('Id').addEventListener('change'
+    , function()
+    { this.form.submit();}
+    );
+</script>
