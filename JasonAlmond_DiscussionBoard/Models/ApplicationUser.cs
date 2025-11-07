@@ -6,10 +6,10 @@ namespace JasonAlmond_DiscussionBoard.Models;
 public class ApplicationUser : IdentityUser
 {
     [MaxLength(100)] // Limit the First Name to 100 characters
-    public string FirstName { get; set; } = string.Empty;
+    public string FirstName { get; set; }
 
     [MaxLength(100)] // Limit the Last Name to 100 characters
-    public string LastName { get; set; } = string.Empty;
+    public string LastName { get; set; }
 
     public List<DiscussionThread> Threads { get; set; } // List of threads created by the user
     public List<Post> Posts { get; set; } // List of posts created by the user

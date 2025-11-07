@@ -36,7 +36,6 @@ namespace JasonAlmond_DiscussionBoard.Services
             ApplicationUser = user;
             return ApplicationUser;
         }
-
         
         public async Task<List<ApplicationUser>> GetAllUsers()
         {

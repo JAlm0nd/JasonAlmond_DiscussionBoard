@@ -1,3 +1,4 @@
+using JasonAlmond_DiscussionBoard.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using JasonAlmond_DiscussionBoard.Data;
@@ -7,6 +8,7 @@ using JasonAlmond_DiscussionBoard.Pages;
 using JasonAlmond_DiscussionBoard.Repos;
 using JasonAlmond_DiscussionBoard.Services;
 using JasonAlmond.DiscussionBoard.Repos;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,8 @@ builder.Services.AddAuthorization(options =>
         context.User.HasClaim(c => c.Type.Equals(PolicyTypes.IsModerator) && c.Value.Equals(PolicyValues.True))
         ||
         context.User.HasClaim(c => c.Type.Equals(PolicyTypes.IsAdmin) && c.Value.Equals(PolicyValues.True))));
+    options.AddPolicy(PolicyTypes.IsOwnerOrAdmin, policyBuilder => policyBuilder.AddRequirements(new
+        IsOwnerOrAdminRequirement()));
 });
 //Needed for layout testing
 builder.Services.AddHttpContextAccessor();
@@ -35,6 +39,8 @@ builder.Services.AddScoped<IRepo<DiscussionThread>, DiscussionThreadRepo>();
 builder.Services.AddScoped<IRepo<Post>, PostRepo>();
 builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<ApplicationUserService>();
+//For specific authorization
+builder.Services.AddScoped<IAuthorizationHandler, IsOwnerOrAdminHandler>();
 
 var app = builder.Build();
 

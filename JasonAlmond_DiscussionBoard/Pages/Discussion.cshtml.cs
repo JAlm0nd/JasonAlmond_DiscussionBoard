@@ -37,7 +37,7 @@ namespace JasonAlmond_DiscussionBoard.Pages
                 _log.LogError($"Error loading posts for ThreadId {ThreadId}: {ex.Message}");
             }
         }*/
-        public void OnGet(int ThreadId)
+        public void OnGet()
         {
             try
             {

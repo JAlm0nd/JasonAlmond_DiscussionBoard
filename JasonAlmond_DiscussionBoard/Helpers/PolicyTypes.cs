@@ -4,5 +4,6 @@
     {
         public const string IsAdmin = "IsAdmin";
         public const string IsModerator = "IsModerator";
+        public const String IsOwnerOrAdmin = "IsOwnerOrAdminRequirement";
     }
 }

@@ -1,5 +1,9 @@
 ﻿@page
 @using JasonAlmond_DiscussionBoard.Models;
+@using JasonAlmond_DiscussionBoard.Helpers;
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -29,7 +33,19 @@
             @foreach (DiscussionThread dt in Model.DiscussionThreads)
             {
                 <tr>
-                    <td><a href="/DiscussionThreads/@dt.Id">@dt.Title</a></td>
+                    <td>
+                        @if ((await AuthorizationService.AuthorizeAsync(HttpContextAccessor.HttpContext.User,
+                                 dt,
+                                 PolicyTypes.IsOwnerOrAdmin)).Succeeded)
+                        {
+                            <a href="/DiscussionThreads/@dt.Id">@dt.Title</a>
+                        }
+                        else
+                        {
+                            @dt.Title
+                        }
+                    </td>@*
+                    <td><a href="/DiscussionThreads/@dt.Id">@dt.Title</a></td>*@
                     <td>@dt.ApplicationUser.ToString()</td>
                     <td>@dt.CreatedAt.ToLocalTime().ToString("f")</td>
                     <td><a href="/Discussion/@dt.Id">@dt.PostCount</a></td>

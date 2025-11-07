@@ -13,12 +13,18 @@
             <div class="row">
                 <p>Created On @Model.DiscussionThread.CreatedAt.ToString("f")</p>
             </div>
-            <input type="hidden" asp-for="@Model.Discussion.Id" value="@Model.Discussion.Id"/>
         }
+        <input type="hidden" asp-for="Discussion.Id"/>
+
+        <div class="form-group">
+            <label asp-for="Discussion.Title" class="control-label"></label>
+            <input asp-for="Discussion.Title" value="@Model.Discussion.Title" class="form-control" />
+            <span asp-validation-for="Discussion.Title" class="text-danger"></span>
+        </div>
 
         <div class="form-group">
             <label asp-for="Discussion.Content" class="control-label"></label>
-            <input type="hidden" asp-for="@Model.Discussion.Content" />
+            <input type="hidden" asp-for="Discussion.Content" />
             <div id="body"></div>
             <span asp-validation-for="Discussion.Content" class="text-danger"></span>
         </div>
