@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JasonAlmond_DiscussionBoard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1117cc1d3bd472f5c009819954a924250fd802c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa4d7209391c77709c51c2c9655f6c197f3d6e82")]
 [assembly: System.Reflection.AssemblyProductAttribute("JasonAlmond_DiscussionBoard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JasonAlmond_DiscussionBoard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

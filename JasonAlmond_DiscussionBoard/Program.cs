@@ -1,20 +1,32 @@
 using JasonAlmond_DiscussionBoard.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using JasonAlmond_DiscussionBoard.Data;
 using JasonAlmond_DiscussionBoard.Helpers;
 using JasonAlmond_DiscussionBoard.Models;
-using JasonAlmond_DiscussionBoard.Pages;
 using JasonAlmond_DiscussionBoard.Repos;
 using JasonAlmond_DiscussionBoard.Services;
 using JasonAlmond.DiscussionBoard.Repos;
 using Microsoft.AspNetCore.Authorization;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Environment.ApplicationName = "JasonAlmond_DiscussionBoard";
+string logPath = builder.Environment.ContentRootPath + "/DiscussionBoard";
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext()
+    .WriteTo.Async(a => a.Console())
+    .WriteTo.SQLite( //<-- New section
+        sqliteDbPath: logPath + @"-logs.db",
+        restrictedToMinimumLevel: LogEventLevel.Information,
+        storeTimestampInUtc: true
+    ));
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -56,6 +68,7 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
